@@ -1,29 +1,3 @@
-# Technical Specifications
-
-## 1. Technology Stack
-
-### Core
-* **Framework:** Next.js 15 (App Router)
-* **Language:** TypeScript (Strict Mode)
-* **Runtime:** Node.js (Latest LTS)
-
-### Data Layer
-* **Database:** PostgreSQL
-* **ORM:** Prisma
-* **Storage:** Google Drive API (v3)
-
-### UI/UX
-* **Styling:** Tailwind CSS
-* **Component Library:** Shadcn/UI
-* **Icons:** Lucide React
-
-## 2. Database Schema (Multi-Tenant Support)
-
-This schema is designed to allow multiple orchestras to use the same system without data overlap.
-
-```prisma
-// schema.prisma
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -90,20 +64,4 @@ enum Role {
   MEMBER
   GUEST
 }
-```
 
-## 3. Parsing Logic Specification (Regex)
-The system relies on strict file naming to function.
-* **Format:** `[Code] Title-Composer-Instrument.pdf`.
-* **Delimiters:** En-dash `(–)` or Hyphen `(-)`.
-* **Regex Pattern (Conceptual):** `^\[([A-Z]\d{4})\]\s*(.+?)–(.+?)–(.+?)(?:\.pdf)?$`
-    * Group 1: Code (e.g., `N0001`)
-    * Group 2: Title (e.g., `The_Nutcracker`)
-    * Group 3: Composer (e.g., `Tchaikovsky`)
-    * Group 4: Instrument Raw (e.g., `Oboes`)
-
-## 4. Environment Variables
-* DATABASE_URL="postgresql://..."
-* AUTH_SECRET="secret..."
-* GOOGLE_CLIENT_ID="..."
-* GOOGLE_CLIENT_SECRET="..."
